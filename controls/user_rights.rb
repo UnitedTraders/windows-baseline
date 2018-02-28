@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+network_logon_user = attribute('network_logon_user', default: 'S-1-0-0', description: 'User allowed for network logon')
+
 title 'User Rights Assignment'
 
 control 'cis-access-cred-manager-2.2.1' do
@@ -16,7 +18,7 @@ control 'cis-network-access-2.2.2' do
   title '2.2.2 Set Access this computer from the network'
   desc 'Set Access this computer from the network'
   describe security_policy do
-    its('SeNetworkLogonRight') { should eq ['S-1-0-0'] }
+    its('SeNetworkLogonRight') { should eq [network_logon_user] }
   end
 end
 
